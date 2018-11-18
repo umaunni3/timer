@@ -94,6 +94,7 @@ function getTime() {
 function startTimer() {
     // check if the user has entered a time into the timerUpdateInterval box; if so, update value
     if (displayUpdates) {  // input box only visible if displayUpdates is true
+        
         var updateValue = document.getElementById("timerUpdateInt").value;
         if (updateValue < 10) {
             updateValue = 10; // bump up to smallest acceptable update interval (10 ms)
@@ -175,18 +176,36 @@ function formatTime(time) {
 // if the user hits any of these keys, timer should stop
 var timerStopKeys = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '[', ']', '\\', ';', "'", ',', '.', '/', ' '];
 
+var spaceDown = false; // set true when we detect spacebar down (before a solve has started)
+
+function handleKeyup(e) {
+    // if it's spacebar being released, start the timer
+    if (e.key == " " && !timerStarted && spaceDown) {
+        // reset time text to black
+        document.getElementById("time").style.color = "black";
+        startTimer();
+        spaceDown = false;
+    }
+}
+
 window.onload = function(){
     setTimeListHeight();
     // put up a new scramble
     document.getElementById("scramble").innerHTML = generateScramble();
+    document.onkeyup = handleKeyup;
     document.onkeypress = function(e){
         var key = e.key;//code(e);
         // do something with key
 //        console.log(key == " ");
         if (key == " " && !timerStarted) {
-            startTimer();
+            spaceDown = true;
+            document.getElementById("time").innerHTML = "ready";
+            document.getElementById("time").style.color = "green";
+            // startTimer();
         } else if (timerStarted && timerStopKeys.includes(key)) {
             stopTimer();
+            spaceDown = false;
+            timerStarted = false;
         }
     };
 };

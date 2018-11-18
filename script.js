@@ -41,7 +41,6 @@ function updateAvg(N) {
         var avg = aoN(N);
         var tag = "ao" + N;
     }
-    console.log(avg, tag);
     document.getElementById(tag).innerHTML = avg;
 }
 
@@ -99,7 +98,6 @@ function average(arr) {
     for (var i = 0; i < arr.length; i++) {
         total += arr[i];
     }
-    console.log(total);
     return total/arr.length;
 }
 
