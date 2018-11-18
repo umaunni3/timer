@@ -12,8 +12,19 @@ var scrambleLength = 22; // longer scrambles to compensate for bad scramble gene
 function generateScramble() {
     // generate a scramble and return it as a string
     var scramble = "";
+    var prevMove = null;
     for (var i = 0; i < scrambleLength; i++) {
-        scramble += " " + chooseRandElem(moves) + "    ";
+        var move = chooseRandElem(moves);
+        if (prevMove != null) {
+            // can't index into prevMove when it's null
+            while (prevMove[0] == move[0]) {
+            // if this move starts with the same letter as the last move, choose a new move
+            move = chooseRandElem(moves);
+            }
+        }
+        
+        scramble += " " + move + "    ";
+        prevMove = move;
     }
     return scramble;
 }
