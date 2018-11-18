@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> hello world let's solve some cubes</title>
+    
+    <script src="script.js"></script>
+    <script src="timer.js"></script>
+    <script src="scramble.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    
+    </head>
+
+
+    <body>
+        <div id="optionsInterface">
+            <form method="post" action="/Tests/Post">  
+                <fieldset>  
+                    <legend>Preferences</legend>  
+                    <input type="checkbox" id="hideAll" onclick="toggleHideAll()">hide times and averages while solving <br>
+                    <input type="checkbox" id="displayTime" value="Cats" onclick="updateTimerUpdate()">display time while solving<br>
+                    <div id="timerUpdateInputElems"> 
+                        timer update interval (in millisec): <input type="number" id="timerUpdateInt">
+                    </div>
+ 
+                             
+                    
+                </fieldset>  
+</form>  
+        
+        
+        
+        
+        </div>
+        
+        <div id="timerInterface">
+        
+
+<!--            <button onclick="misc()">misc testing!</button>-->
+            <div style="text-align: center; font-family: 'Comic Sans MS', 'cursive', 'sans-serif'; font-size: 25px">
+                <p id="scramble"> </p>
+            </div>
+            
+            
+            <div id="timeDiv">
+                <p id="time"></p>
+            </div>
+            
+        </div>
+        
+        <div id="timesAndAvgs">
+            <span id="timesList">
+                <table class="tg" id="timesListTable" style="undefined;table-layout: fixed; width: 75px">
+                    <colgroup>
+                    <col style="width: 25px">
+                    <col style="width: 50px">
+                    </colgroup>
+
+                </table>
+
+            </span>
+            
+            <span id="averages">
+                <table class="tg1" style="undefined;table-layout: fixed; width: 95px">
+                    <colgroup>
+                        <col style="width: 45px">
+                        <col style="width: 50px">
+                    </colgroup>
+                    <tr>
+                        <th class="tg-1lax">mo3</th>
+                        <th class="tg-1lax" id="mo3"></th>
+                    </tr>
+                    <tr>
+                        <td class="tg-1lax">ao5</td>
+                        <td class="tg-1lax" id="ao5"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-1lax">ao12</td>
+                        <td class="tg-1lax" id="ao12"></td>
+                    </tr>
+                    <tr>
+                        <td class="tg-1lax">ao100</td>
+                        <td class="tg-1lax" id="ao100"></td>
+                    </tr>
+                </table>
+
+            
+            
+            </span>
+            
+        </div>
+
+    
+    </body>
+
+
+</html>

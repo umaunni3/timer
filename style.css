@@ -1,0 +1,72 @@
+#timeDiv {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    padding: 70px 0;
+    font-size: 60px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+#timerUpdateInputElems {
+    display: none;
+}
+
+.tg  {
+    border-collapse:collapse;border-spacing:0;
+}
+
+.tg td {
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    padding:10px 5px;
+    border-style:solid;
+    border-width:1px;
+    overflow:hidden;
+    word-break:normal;
+    border-color:black;
+}
+
+.tg th {
+    font-family:Arial, sans-serif;
+    font-size:14px;
+    font-weight:normal;
+    padding:10px 5px;
+    border-style:solid;
+    border-width:1px;
+    overflow:hidden;
+    word-break:normal;
+    border-color:black;
+}
+
+.tg .tg-0lax {
+    text-align:left;
+    vertical-align:top;
+}
+
+.tg1  {border-collapse:collapse;border-spacing:0;}
+.tg1 td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg1 th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg1 .tg-1lax{text-align:left;vertical-align:top}
+
+/*
+#timesAndAvgs {
+    
+    width: 350px;
+    display: block;
+    text-align: center;
+}
+*/
+
+#timesList {
+    position: absolute;
+    top: 75%;
+    overflow: auto;
+    height: 0px;
+}
+
+
+#averages {
+    position: absolute;
+    top: 75%;
+    left: 25%;
+}
