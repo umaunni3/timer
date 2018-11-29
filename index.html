@@ -4,14 +4,16 @@
     <title> hello world let's solve some cubes</title>
     
     <script src="script.js"></script>
-    <script src="timer.js"></script>
     <script src="scramble.js"></script>
+    <script src="timer.js"></script>
+    <script src="data.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
     
     </head>
 
 
     <body>
+        <!-- PREFERENCES BAR -->
         <div id="optionsInterface">
             <form method="post" action="/Tests/Post">  
                 <fieldset>  
@@ -32,10 +34,11 @@
         
         </div>
         
+        <!-- TIMER INTERFACE -->
         <div id="timerInterface">
         
 
-<!--            <button onclick="misc()">misc testing!</button>-->
+            <!--            <button onclick="misc()">misc testing!</button>-->
             <div style="text-align: center; font-family: 'Comic Sans MS', 'cursive', 'sans-serif'; font-size: 25px">
                 <p id="scramble"> </p>
             </div>
@@ -47,8 +50,10 @@
             
         </div>
         
+        <!-- TIMES LIST DISPLAY -->
         <div id="timesAndAvgs">
             <span id="timesList">
+<!--
                 <table class="tg" id="timesListTable" style="undefined;table-layout: fixed; width: 75px">
                     <colgroup>
                     <col style="width: 25px">
@@ -56,6 +61,7 @@
                     </colgroup>
 
                 </table>
+-->
 
             </span>
             

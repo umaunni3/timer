@@ -13,6 +13,8 @@ var continueUpdating = false; // to be used by updateScreen() method to determin
 
 var hideAll = true; // hide all elements onscreen, including solve times and averages; only show indicator that timer is running
 
+var currScramble = generateScramble(); // store the scramble for the upcoming solve
+
 
 function updateScreen() {
     // update the time <p> elem in index.html to reflect time, at time intervals specified by updateInterval
@@ -93,6 +95,7 @@ function getTime() {
 
 function startTimer() {
     // check if the user has entered a time into the timerUpdateInterval box; if so, update value
+    document.body.style.backgroundColor = green;
     if (displayUpdates) {  // input box only visible if displayUpdates is true
         
         var updateValue = document.getElementById("timerUpdateInt").value;
@@ -120,25 +123,38 @@ function startTimer() {
 
 function stopTimer() {
     // stop the timer, determine time elapsed, reset timerStarted and startTime variables, optionally do something with the time recorded
+    console.log(document.getElementById("scramble"));
+    console.log(currScramble);
     if (timerStarted) {
+        document.body.style.backgroundColor = lavendar;
         var endTime = Date.now();
         var secDiff = formatTime(endTime - startTime); // convert to seconds
+        
         if (!hideAll) {
             document.getElementById("time").innerHTML = secDiff;
         } else {
             document.getElementById("time").innerHTML = " "; // show that timer has stopped
         }
+        addTime(seconds(endTime - startTime), currScramble);
+        
         
         timerStarted = false;
         continueUpdating = false;
         startTime = null;
-        addTime(secDiff);
         
-        // put up a new scramble
-        document.getElementById("scramble").innerHTML = generateScramble();
+//        new Result(secDiff, document.getElementById("scramble").innerHTML);
+        
+        // put up a new scramble and store it
+       currScramble = generateScramble(); document.getElementById("scramble").innerHTML = currScramble;
+        
     }
     // if timer hasn't been started yet, we can't stop it! don't do anything
     
+}
+
+function seconds(time) {
+    /* Convert from milliseconds to seconds */
+    return time / 1000;
 }
 
 function formatTime(time) {
@@ -189,9 +205,10 @@ function handleKeyup(e) {
 }
 
 window.onload = function(){
+    document.body.style.backgroundColor = lavendar;
     setTimeListHeight();
     // put up a new scramble
-    document.getElementById("scramble").innerHTML = generateScramble();
+    document.getElementById("scramble").innerHTML = currScramble;
     document.onkeyup = handleKeyup;
     document.onkeypress = function(e){
         var key = e.key;//code(e);
@@ -202,6 +219,10 @@ window.onload = function(){
             document.getElementById("time").innerHTML = "ready";
             document.getElementById("time").style.color = "green";
             // startTimer();
+        } else if (key == "d") {
+            // delete times; prompt for which numbered value to delete (index)
+            
+            
         } else if (timerStarted && timerStopKeys.includes(key)) {
             stopTimer();
             spaceDown = false;
@@ -210,4 +231,7 @@ window.onload = function(){
     };
 };
 
+
+var green = "#ccffcc";
+var lavendar = "#e6e6ff";
 

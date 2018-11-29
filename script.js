@@ -10,6 +10,13 @@ function toggleDropDown() {
 }
 
 
+/* possible optimizations!
+    - caching total for averages so that after each solve we just have to subtract the oldest time and add the newest time and divide by (5, 12, 100)
+     (would require recomputing after deletion of value, but would still save time overall in terms of amortized performance)
+     
+*/
+
+
 var timesList = [];
 var numSolves = 0;
 
@@ -30,6 +37,37 @@ function addTime(time) {
     updateAvg(12);
     updateAvg(100);
     
+}
+
+function deleteTime(index) {
+    // delete the value at the specified index (if that index exists in the list)
+    
+    timesList.splice(index, 1);
+    
+    // also remove from displayed list
+    var times = document.getElementById("timesList").childNodes;
+    for (var i = 0; i < times.length; i++) {
+        if (i == 1) {
+            console.log("!!! " + typeof times[i].children);
+            for (var j = 0; j < times[i].children.length; j++) {
+                console.log(times[i].children[j]);
+            }
+        }
+        console.log(times[i]);
+    }
+    var tableRows = times[1].children;
+    // we have to reverse the index because the newest values (with highest indeces) are at smallest positions in list; if there are N solves in the list so far, then tableRows[0] is the Nth solve, tableRows[1] is the N-1st solve, and so on. To delete the Kth solve, delete the (N-K)th index.
+    var rowToDelete = tableRows[timesList.length - index + 1];
+   times[1].removeChild(rowToDelete);
+    
+    // re-enumerate the times starting from where we deleted
+    console.log("88888");
+    for (var i = timesList.length - index + 1; i >= 0; i--) {
+        // shift all the numbers down by 1
+        var rowIndex = tableRows[i];
+        console.log(rowIndex);
+        rowIndex.innerHTML = parseInt(rowIndex.innerHTML) - 1;
+    }
 }
 
 function updateAvg(N) {

@@ -23,7 +23,7 @@ function generateScramble() {
             }
         }
         
-        scramble += " " + move + "    ";
+        scramble += move + " ";
         prevMove = move;
     }
     return scramble;
