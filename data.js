@@ -75,9 +75,18 @@ class Result {
         }
         
         if (!confirm(dispText)) {
-            console.log("cool!");
-            resultList.splice(this.ind, 1);
+            resultList.splice(this.index, 1);
             row.remove(); // remove from DOM tree
+            
+            // update displayed time list
+            displayTimesTable(resultList);
+            
+            // update averages
+            updateAvg(3);
+            updateAvg(5);
+            updateAvg(12);
+            updateAvg(100);
+            
         }
         
         
@@ -110,6 +119,7 @@ function generateTable(results) {
     
     // now, add the colgroup element
     var colgroup = document.createElement("colgroup");
+    colgroup.setAttribute("id", "timesListCol");
     var col1 = document.createElement("col");
     col1.setAttribute("style", "width:25px");
     colgroup.appendChild(col1);
@@ -120,6 +130,21 @@ function generateTable(results) {
     
     return table;
     
+}
+
+function tableInsertTime(result) {
+    /* Insert a new result into the table. If a table does not already exist, create and display a new one with this result in it. */
+    
+    if (document.getElementById("timesList").innerHTML) {
+        // table already exists, just insert a new time
+        console.log(document.getElementById("timesList"));
+        var table = document.getElementById("timesList").firstChild;
+        var colgroup = document.getElementById("timesListCol");
+        colgroup.after(result.repr());
+    } else {
+        // make a new table containing this result
+        displayTimesTable([result]);
+    }
 }
 
 function displayTimesTable(results) {
@@ -182,7 +207,7 @@ function updateAvg(N) {
 }
 
 function addTime(time, scramble) {
-    new Result(time, scramble);
+    var r = new Result(time, scramble);
     
     if (getComputedStyle(document.getElementById("timesList"), null).height == "0px") {
         // not yet been set; set the height of the element before pushing new time onto the list display
@@ -190,7 +215,8 @@ function addTime(time, scramble) {
     }
     
     // update the table being displayed
-    displayTimesTable(resultList);
+    tableInsertTime(r);
+//    displayTimesTable(resultList);
     
     // also update averages
     updateAvg(3);
